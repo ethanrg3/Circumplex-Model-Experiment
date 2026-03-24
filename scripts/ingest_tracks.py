@@ -34,17 +34,6 @@ def create_track_df() -> pl.DataFrame:
     tracks_df = pl.concat(track_dfs, how="diagonal")
     return tracks_df
 
-def plot_tracks(tracks_df: pl.DataFrame) -> None:
-    """Plot the tracks on a valence-energy graph."""
-    plot = (
-        tracks_df
-        .pipe(ggplot, aes(x="energy", y="valence", label="track_name"))
-        + geom_point()
-        + scale_x_continuous(limits=(0, 1))
-        + scale_y_continuous(limits=(0, 1))
-        + geom_text(size=8, nudge_y=0.02)
-    )
-    plot.show()
 
 if __name__ == "__main__":
     tracks = create_track_df()
@@ -53,4 +42,3 @@ if __name__ == "__main__":
         .select(c.track_name, c.energy, c.valence)
     )
     print(filtered_tracks)
-    plot_tracks(filtered_tracks)
