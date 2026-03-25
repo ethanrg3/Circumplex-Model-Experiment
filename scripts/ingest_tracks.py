@@ -34,7 +34,6 @@ def create_track_df() -> pl.DataFrame:
     tracks_df = pl.concat(track_dfs, how="diagonal")
     return tracks_df
 
-
 if __name__ == "__main__":
     tracks = create_track_df()
     filtered_tracks = (
